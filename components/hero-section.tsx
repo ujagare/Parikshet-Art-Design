@@ -2,26 +2,51 @@
 
 import Link from "next/link"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
 export function HeroSection() {
+  const [isDesktop, setIsDesktop] = useState(false)
+  const [reduceMotion, setReduceMotion] = useState(false)
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 1024px)")
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+
+    const handleDesktop = () => setIsDesktop(desktopQuery.matches)
+    const handleMotion = () => setReduceMotion(motionQuery.matches)
+
+    handleDesktop()
+    handleMotion()
+
+    desktopQuery.addEventListener("change", handleDesktop)
+    motionQuery.addEventListener("change", handleMotion)
+
+    return () => {
+      desktopQuery.removeEventListener("change", handleDesktop)
+      motionQuery.removeEventListener("change", handleMotion)
+    }
+  }, [])
+
   return (
     <section className="relative min-h-screen flex">
       {/* Left content - 20% */}
       <div className="hidden lg:flex relative items-center justify-center w-[22%] px-8 overflow-hidden">
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          aria-hidden
-        >
-          <source src="/silk-bg.webm" type="video/webm" />
-        </video>
+        {isDesktop && (
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            aria-hidden
+          >
+            <source src="/silk-bg.webm" type="video/webm" />
+          </video>
+        )}
         <div className="absolute inset-0 bg-[#2B1608]/70" />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -50,9 +75,13 @@ export function HeroSection() {
         {/* Background image - converted to Next.js Image with priority for LCP */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            initial={{ scale: 1.05 }}
-            animate={{ scale: 1.15 }}
-            transition={{ duration: 10, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
+            initial={reduceMotion ? { scale: 1 } : { scale: 1.03 }}
+            animate={reduceMotion ? { scale: 1 } : { scale: 1.08 }}
+            transition={
+              reduceMotion
+                ? { duration: 0 }
+                : { duration: 12, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }
+            }
             className="absolute inset-0"
           >
             <Image
@@ -106,18 +135,20 @@ export function HeroSection() {
         </div>
 
         {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
+        {!reduceMotion && (
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-            className="w-[1px] h-12 bg-background/50"
-          />
-        </motion.div>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          >
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+              className="w-[1px] h-12 bg-background/50"
+            />
+          </motion.div>
+        )}
       </div>
     </section>
   )

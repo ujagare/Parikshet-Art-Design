@@ -6,7 +6,7 @@
 /* Updated color palette for luxury aesthetic */
 :root {
   --background: #f9f9f9;
-  --foreground: #0a0a0a;
+  --foreground: #8a7040;
   --card: #f9f9f9;
   --card-foreground: #0a0a0a;
   --popover: #f9f9f9;
@@ -16,14 +16,14 @@
   --secondary: #f9f9f9;
   --secondary-foreground: #0a0a0a;
   --muted: #f5f5f5;
-  --muted-foreground: #6b7280;
+  --muted-foreground: #8a7040;
   --accent: #f5f5f5;
   --accent-foreground: #0a0a0a;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
   --border: #e5e5e5;
   --input: #e5e5e5;
-  --ring: #6b7280;
+  --ring: #8a7040;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -132,7 +132,7 @@
   h4,
   h5,
   h6 {
-    color: #2b1608;
+    color: #8a7040;
   }
   p {
     text-transform: capitalize;

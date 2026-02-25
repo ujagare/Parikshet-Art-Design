@@ -4,6 +4,7 @@ import nodemailer from "nodemailer"
 type ContactPayload = {
   name: string
   email: string
+  service: string
   subject: string
   message: string
 }
@@ -24,6 +25,7 @@ function escapeHtml(input: string) {
 function validate(payload: ContactPayload) {
   if (payload.name.trim().length < 2) return "Invalid name."
   if (!isValidEmail(payload.email.trim())) return "Invalid email."
+  if (!payload.service.trim()) return "Service is required."
   if (!payload.subject.trim()) return "Subject is required."
   if (payload.message.trim().length < 10) return "Message should be at least 10 characters."
   return null
@@ -35,6 +37,7 @@ export async function POST(req: Request) {
     const payload: ContactPayload = {
       name: body.name ?? "",
       email: body.email ?? "",
+      service: body.service ?? "",
       subject: body.subject ?? "",
       message: body.message ?? "",
     }
@@ -73,11 +76,12 @@ export async function POST(req: Request) {
       to: mailTo,
       replyTo: payload.email.trim(),
       subject: `Contact Form: ${payload.subject.trim()}`,
-      text: `Name: ${payload.name}\nEmail: ${payload.email}\nSubject: ${payload.subject}\n\nMessage:\n${payload.message}`,
+      text: `Name: ${payload.name}\nEmail: ${payload.email}\nService: ${payload.service}\nSubject: ${payload.subject}\n\nMessage:\n${payload.message}`,
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${escapeHtml(payload.name)}</p>
         <p><strong>Email:</strong> ${escapeHtml(payload.email)}</p>
+        <p><strong>Service:</strong> ${escapeHtml(payload.service)}</p>
         <p><strong>Subject:</strong> ${escapeHtml(payload.subject)}</p>
         <p><strong>Message:</strong></p>
         <p>${escapeHtml(payload.message).replace(/\n/g, "<br/>")}</p>

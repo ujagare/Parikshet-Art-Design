@@ -5,10 +5,12 @@ import Image from "next/image"
 import { Facebook, Instagram } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { PremiumFooter } from "@/components/premium-footer"
+import { toast } from "@/hooks/use-toast"
 
 type FormValues = {
   name: string
   email: string
+  service: string
   subject: string
   message: string
 }
@@ -16,6 +18,7 @@ type FormValues = {
 const initialValues: FormValues = {
   name: "",
   email: "",
+  service: "",
   subject: "",
   message: "",
 }
@@ -33,6 +36,7 @@ export default function ContactPage() {
 
     if (values.name.trim().length < 2) next.name = "Please enter your full name."
     if (!emailRegex.test(values.email.trim())) next.email = "Please enter a valid email."
+    if (!values.service.trim()) next.service = "Please select a service."
     if (!values.subject.trim()) next.subject = "Please enter a subject."
     if (values.message.trim().length < 10) next.message = "Message should be at least 10 characters."
 
@@ -62,15 +66,33 @@ export default function ContactPage() {
       const data = (await res.json()) as { ok?: boolean; error?: string }
 
       if (!res.ok || !data.ok) {
-        setSubmitError(data.error || "Unable to send message. Please try again.")
+        const message = data.error || "Unable to send message. Please try again."
+        setSubmitError(message)
+        toast({
+          title: "Message not sent",
+          description: message,
+          variant: "destructive",
+        })
         return
       }
 
       setValues(initialValues)
       setSubmitted(false)
-      setSubmitMessage("Thank you! Your message has been sent successfully.")
+      const message = "Thank you! Your message has been sent successfully."
+      setSubmitMessage(message)
+      toast({
+        title: "Message sent",
+        description: message,
+        className: "border-green-700 bg-green-50 text-green-900",
+      })
     } catch {
-      setSubmitError("Unable to send message. Please try again.")
+      const message = "Unable to send message. Please try again."
+      setSubmitError(message)
+      toast({
+        title: "Message not sent",
+        description: message,
+        variant: "destructive",
+      })
     } finally {
       setIsSubmitting(false)
     }
@@ -148,6 +170,34 @@ export default function ContactPage() {
 
               <div>
                 <label
+                  htmlFor="service"
+                  className="block text-xs tracking-[0.15em] uppercase text-muted-foreground mb-2"
+                >
+                  Services
+                </label>
+                <select
+                  id="service"
+                  value={values.service}
+                  onChange={(e) => handleChange("service", e.target.value)}
+                  className={`w-full border bg-transparent px-4 py-3 outline-none transition-colors ${
+                    submitted && errors.service
+                      ? "border-red-500 focus:border-red-500"
+                      : "border-[#2B1608]/35 focus:border-[#2B1608]"
+                  }`}
+                >
+                  <option value="">Select a service</option>
+                  <option value="Graphic Design">Graphic Design</option>
+                  <option value="Sculpture and Mural Art">Sculpture and Mural Art</option>
+                  <option value="Paintings">Paintings</option>
+                  <option value="Event Planning">Event Planning</option>
+                  <option value="Music">Music</option>
+                  <option value="Pune Mertro Work">Pune Mertro Work</option>
+                </select>
+                {submitted && errors.service && <p className="mt-1 text-xs text-red-600">{errors.service}</p>}
+              </div>
+
+              <div>
+                <label
                   htmlFor="subject"
                   className="block text-xs tracking-[0.15em] uppercase text-muted-foreground mb-2"
                 >
@@ -193,7 +243,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto border border-[#2B1608] bg-[#2B1608] text-background px-8 py-3 text-sm tracking-[0.18em] uppercase hover:bg-transparent hover:text-[#2B1608] transition-colors"
+                className="w-full sm:w-auto border border-[#8A7040] bg-[#8A7040] text-background px-8 py-3 text-sm tracking-[0.18em] uppercase hover:bg-transparent hover:text-[#8A7040] transition-colors"
               >
                 {isSubmitting ? "Sending..." : "Submit"}
               </button>
@@ -236,7 +286,7 @@ export default function ContactPage() {
                 <p className="text-xs tracking-[0.2em] uppercase text-foreground/70 mb-3">Follow Us</p>
                 <div className="flex items-center gap-4">
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/parikshet.phand?igsh=OGpsdWRrdmhnZjA3"
                     target="_blank"
                     rel="noreferrer"
                     aria-label="Instagram"
@@ -245,7 +295,7 @@ export default function ContactPage() {
                     <Instagram className="h-4 w-4" />
                   </a>
                   <a
-                    href="https://facebook.com"
+                    href="https://www.facebook.com/share/16PAtjqvax/"
                     target="_blank"
                     rel="noreferrer"
                     aria-label="Facebook"
@@ -275,3 +325,4 @@ export default function ContactPage() {
     </main>
   )
 }
+
