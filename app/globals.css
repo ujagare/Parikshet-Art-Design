@@ -138,3 +138,50 @@
     text-transform: capitalize;
   }
 }
+
+/* Lenis recommended CSS */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Premium slim scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(138, 112, 64, 0.85) rgba(43, 22, 8, 0.12);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(43, 22, 8, 0.1);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #a88953 0%, #8a7040 100%);
+  border-radius: 999px;
+  border: 1px solid rgba(247, 238, 219, 0.9);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #b8985f 0%, #8a7040 100%);
+}

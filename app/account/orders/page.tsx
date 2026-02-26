@@ -141,7 +141,7 @@ export default function OrdersPage() {
                   <Package className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" />
                   <p className="text-muted-foreground mb-6">You haven't placed any orders yet.</p>
                   <Link
-                    href="/shop"
+                    href="/services"
                     className="text-sm tracking-[0.15em] uppercase underline underline-offset-4 hover:no-underline transition-all"
                   >
                     Start Shopping

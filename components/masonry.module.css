@@ -10,6 +10,8 @@
   box-sizing: border-box;
   cursor: pointer;
   will-change: transform, width, height;
+  content-visibility: auto;
+  contain-intrinsic-size: 320px 320px;
 }
 
 .itemImg {

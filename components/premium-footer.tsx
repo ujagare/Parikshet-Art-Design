@@ -1,6 +1,4 @@
 "use client"
-
-import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import { Instagram, Facebook } from "lucide-react"
@@ -13,14 +11,13 @@ export function PremiumFooter() {
       { label: "About", href: "/about" },
       { label: "Services", href: "/services" },
       { label: "Contact", href: "/contact" },
-      { label: "Our Journey", href: "/heritage" },
     ],
     offerings: [
-      { label: "Graphic Design", href: "/services" },
-      { label: "Sculpture and Mural Art", href: "/services" },
-      { label: "Paintings", href: "/services" },
-      { label: "Event Planning", href: "/services" },
-      { label: "Music", href: "/services" },
+      { label: "Graphic Design", href: "/services/graphic-design" },
+      { label: "Sculpture and Mural Art", href: "/services/sculpture-and-mural-art" },
+      { label: "Paintings", href: "/services/paintings" },
+      { label: "Event Planning", href: "/services/event-planning" },
+      { label: "Music", href: "/services/music" },
     ],
     support: [
       { label: "Contact Us", href: "/contact" },
@@ -46,27 +43,16 @@ export function PremiumFooter() {
       <div className="absolute inset-0 bg-[#2B1608]/80" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 mb-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-1"
-          >
+          <div className="lg:col-span-1">
             <Link href="/" aria-label="Parikshet ART Studio Home" className="inline-block mb-4">
               <Image src={logoImage} alt="Parikshet ART Studio Logo" loading="lazy" className="h-12 w-auto" />
             </Link>
             <h3 className="font-serif text-xl mb-4">Parikshet ART Studio</h3>
             <p className="text-sm text-background/70">Email: parikshetstudio@gmail.com</p>
             <p className="text-sm text-background/70">Phone: +91 7498 724 242</p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
+          <div>
             <h4 className="text-xs tracking-[0.2em] uppercase mb-6 text-background/60">Studio</h4>
             <ul className="space-y-3">
               {footerLinks.studio.map((link) => (
@@ -77,14 +63,9 @@ export function PremiumFooter() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <div>
             <h4 className="text-xs tracking-[0.2em] uppercase mb-6 text-background/60">Offerings</h4>
             <ul className="space-y-3">
               {footerLinks.offerings.map((link) => (
@@ -95,14 +76,9 @@ export function PremiumFooter() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
+          <div>
             <h4 className="text-xs tracking-[0.2em] uppercase mb-6 text-background/60">Support</h4>
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
@@ -113,7 +89,7 @@ export function PremiumFooter() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
         </div>
 
         <div className="pt-6 border-t border-background/20 flex flex-col md:flex-row justify-between items-center gap-5">
@@ -150,10 +126,10 @@ export function PremiumFooter() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-background/50">
-            <Link href="#" className="hover:text-background/80 transition-colors">
+            <Link href="/privacy-policy" className="hover:text-background/80 transition-colors">
               Privacy Policy
             </Link>
-            <Link href="#" className="hover:text-background/80 transition-colors">
+            <Link href="/terms-of-service" className="hover:text-background/80 transition-colors">
               Terms of Service
             </Link>
             <a

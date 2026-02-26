@@ -4,7 +4,9 @@ import { Geist, Geist_Mono, Inter, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider"
-import { Toaster } from "@/components/ui/toaster"
+import { GlobalTextReveal } from "@/components/global-text-reveal"
+import { Toaster as RadixToaster } from "@/components/ui/toaster"
+import { Toaster as SonnerToaster } from "@/components/ui/sonner"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -18,25 +20,13 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: "MAISON | Luxury Essentials",
-  description: "Timeless elegance, modern refinement. Discover our curated collection of luxury essentials.",
+  title: "Parikshet ART Studio",
+  description: "Parikshet ART Studio - Multi-disciplinary art, design, murals, music, and creative experiences.",
   generator: "v0.app",
   icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
 }
 
@@ -49,7 +39,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body suppressHydrationWarning className={`font-sans antialiased`}>
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
-        <Toaster />
+        <GlobalTextReveal />
+        <RadixToaster />
+        <SonnerToaster position="top-right" richColors />
         <Analytics />
       </body>
     </html>

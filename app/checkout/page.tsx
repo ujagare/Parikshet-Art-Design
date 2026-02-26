@@ -45,7 +45,7 @@ export default function CheckoutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <Link
-              href="/shop"
+              href="/services"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -227,11 +227,11 @@ export default function CheckoutPage() {
                 <div className="border border-border p-4 mb-8">
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     By placing your order, you agree to our{" "}
-                    <Link href="#" className="underline underline-offset-2">
+                    <Link href="/terms-of-service" className="underline underline-offset-2">
                       Terms of Service
                     </Link>{" "}
                     and{" "}
-                    <Link href="#" className="underline underline-offset-2">
+                    <Link href="/privacy-policy" className="underline underline-offset-2">
                       Privacy Policy
                     </Link>
                     .
@@ -239,7 +239,7 @@ export default function CheckoutPage() {
                 </div>
 
                 <Button className="w-full py-6 text-sm tracking-[0.2em] uppercase">
-                  Place Order — ${total.toLocaleString()}
+                  Place Order - ${total.toLocaleString()}
                 </Button>
 
                 <button

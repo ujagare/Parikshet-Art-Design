@@ -51,7 +51,7 @@ export function CountUp({ end, durationMs = 1400, suffix = "" }: CountUpProps) {
   }, [started, end, durationMs])
 
   return (
-    <span ref={ref}>
+    <span ref={ref} data-countup="true">
       {value.toLocaleString()}
       {suffix}
     </span>

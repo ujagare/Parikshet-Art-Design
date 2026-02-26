@@ -233,6 +233,7 @@ export default function Masonry({
                 alt=""
                 loading="lazy"
                 decoding="async"
+                fetchPriority="low"
                 className={styles.itemImageEl}
                 onLoad={(e) => {
                   const img = e.currentTarget
@@ -280,7 +281,14 @@ export default function Masonry({
             <ChevronLeft className="h-7 w-7" />
           </button>
 
-          <img src={activeItem.img} alt="" className="max-h-[88vh] max-w-[90vw] object-contain" decoding="async" />
+          <img
+            src={activeItem.img}
+            alt=""
+            className="max-h-[88vh] max-w-[90vw] object-contain"
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
+          />
 
           <button
             onClick={goNext}

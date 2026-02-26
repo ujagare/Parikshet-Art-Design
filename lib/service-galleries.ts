@@ -54,8 +54,8 @@ export const serviceGalleries: ServiceGallery[] = [
   },
   {
     slug: "pune-mertro",
-    title: "pune Mertro",
-    shortLabel: "pune Mertro",
+    title: "Pune Metro",
+    shortLabel: "Pune Metro",
     category: "Featured Project",
     heroImage: "/service-galleries/pune-mertro/275df44e-6cc5-4732-acfc-4b681cbfda07.jpg",
     folder: "pune-mertro",
@@ -67,7 +67,8 @@ export const serviceGalleries: ServiceGallery[] = [
     title: "Graphic Design",
     shortLabel: "Graphic Design",
     category: "Creative Service",
-    heroImage: "/artisan-hands-crafting-leather-luxury-goods.jpg",
+    heroImage: "/service-galleries/graphic-design/Behance%20Ad%204.jpg",
+    folder: "graphic-design",
     description:
       "Visual identities, campaign systems, and communication design developed with artistic sensitivity and strategic clarity.",
   },
@@ -79,19 +80,25 @@ export function getServiceBySlug(slug: string) {
 
 const imageExt = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"])
 const heightPattern = [400, 250, 600, 320, 520, 360]
+const galleryItemsCache = new Map<string, Array<{ id: string; img: string; url: string; height: number }>>()
 
 export function getServiceGalleryItems(slug: string) {
+  const cached = galleryItemsCache.get(slug)
+  if (cached) return cached
+
   const service = getServiceBySlug(slug)
   if (!service) return []
 
   if (!service.folder) {
     // Fallback set for sections without a dedicated folder.
-    return [
+    const fallbackItems = [
       { id: `${slug}-1`, img: "/artisan-hands-crafting-leather-luxury-goods.jpg", url: "#", height: 420 },
       { id: `${slug}-2`, img: "/premium-leather-material-sustainable-luxury.jpg", url: "#", height: 320 },
       { id: `${slug}-3`, img: "/italian-atelier-workshop-artisan-crafting-luxury-l.jpg", url: "#", height: 540 },
       { id: `${slug}-4`, img: "/minimalist-luxury-handbag-timeless-design.jpg", url: "#", height: 360 },
     ]
+    galleryItemsCache.set(slug, fallbackItems)
+    return fallbackItems
   }
 
   const dirPath = path.join(process.cwd(), "public", "service-galleries", service.folder)
@@ -102,10 +109,12 @@ export function getServiceGalleryItems(slug: string) {
     .filter((file) => imageExt.has(path.extname(file).toLowerCase()))
     .sort((a, b) => a.localeCompare(b))
 
-  return files.map((file, idx) => ({
+  const items = files.map((file, idx) => ({
     id: `${slug}-${idx + 1}`,
     img: `/service-galleries/${service.folder}/${encodeURIComponent(file)}`,
     url: `/service-galleries/${service.folder}/${encodeURIComponent(file)}`,
     height: heightPattern[idx % heightPattern.length],
   }))
+  galleryItemsCache.set(slug, items)
+  return items
 }

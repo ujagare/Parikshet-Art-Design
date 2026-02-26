@@ -3,13 +3,27 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import { motion, useScroll, useSpring, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import SplitText from "@/components/SplitText"
 
 export function HeroSection() {
   const [isDesktop, setIsDesktop] = useState(false)
   const [reduceMotion, setReduceMotion] = useState(false)
+  const { scrollYProgress } = useScroll()
+  const heroImageScaleRaw = useTransform(scrollYProgress, [0, 0.45], [1.02, 1.2])
+  const heroImageYRaw = useTransform(scrollYProgress, [0, 0.45], ["0%", "18%"])
+  const heroImageRotateRaw = useTransform(scrollYProgress, [0, 0.45], [0, -1.2])
+  const heroImageOpacityRaw = useTransform(scrollYProgress, [0, 0.45], [1, 0.78])
+  const heroImageScale = useSpring(heroImageScaleRaw, { stiffness: 85, damping: 20, mass: 0.25 })
+  const heroImageY = useSpring(heroImageYRaw, { stiffness: 85, damping: 20, mass: 0.25 })
+  const heroImageRotate = useSpring(heroImageRotateRaw, { stiffness: 85, damping: 20, mass: 0.25 })
+  const heroImageOpacity = useSpring(heroImageOpacityRaw, { stiffness: 85, damping: 20, mass: 0.25 })
+  const textY = useTransform(scrollYProgress, [0, 0.35], ["0%", "24%"])
+  const textOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0.15])
+  const leftPanelY = useTransform(scrollYProgress, [0, 0.35], ["0%", "18%"])
+  const leftPanelOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0.25])
 
   useEffect(() => {
     const desktopQuery = window.matchMedia("(min-width: 1024px)")
@@ -49,9 +63,10 @@ export function HeroSection() {
         )}
         <div className="absolute inset-0 bg-[#2B1608]/70" />
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.4 }}
+          style={{ y: leftPanelY, opacity: leftPanelOpacity }}
           className="relative z-10 text-background max-w-[240px]"
         >
           <p className="text-[11px] tracking-[0.28em] uppercase text-white mb-5">Parikshet ART Studio</p>
@@ -75,13 +90,8 @@ export function HeroSection() {
         {/* Background image - converted to Next.js Image with priority for LCP */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
-            initial={reduceMotion ? { scale: 1 } : { scale: 1.03 }}
-            animate={reduceMotion ? { scale: 1 } : { scale: 1.08 }}
-            transition={
-              reduceMotion
-                ? { duration: 0 }
-                : { duration: 12, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }
-            }
+            initial={{ scale: 1.02 }}
+            style={{ scale: heroImageScale, y: heroImageY, rotate: heroImageRotate, opacity: heroImageOpacity }}
             className="absolute inset-0"
           >
             <Image
@@ -107,21 +117,44 @@ export function HeroSection() {
         {/* Content overlay */}
         <div className="relative z-10 h-full flex flex-col justify-end p-8 lg:p-16 pb-24 lg:pb-32">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            style={{ y: textY, opacity: textOpacity }}
             className="max-w-2xl"
           >
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl text-background leading-[1.1] mb-6 text-balance">
-              The Art of
-              <br />
-              Quiet Luxury
-            </h1>
-            <p className="text-background/80 text-base lg:text-lg tracking-wide mb-10 max-w-md leading-relaxed">
-              Timeless pieces crafted with intention. Where heritage meets modern refinement.
-            </p>
+            <SplitText
+              text="The Art of Quiet Luxury"
+              className="font-serif text-4xl md:text-5xl lg:text-7xl text-background leading-[1.1] mb-6 text-balance"
+              delay={35}
+              duration={0.9}
+              ease="power3.out"
+              splitType="chars"
+              from={{ opacity: 0, y: 42 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.08}
+              rootMargin="-60px"
+              textAlign="left"
+              tag="h1"
+              onLetterAnimationComplete={() => {}}
+            />
+            <SplitText
+              text="Timeless pieces crafted with intention. Where heritage meets modern refinement."
+              className="text-background/80 text-base lg:text-lg tracking-wide mb-10 max-w-md leading-relaxed"
+              delay={16}
+              duration={0.75}
+              ease="power2.out"
+              splitType="words"
+              from={{ opacity: 0, y: 22 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.08}
+              rootMargin="-50px"
+              textAlign="left"
+              tag="p"
+              onLetterAnimationComplete={() => {}}
+            />
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <Link href="/shop">
+              <Link href="/services">
                 <Button
                   size="lg"
                   className="bg-background text-foreground hover:bg-background/90 px-10 py-6 text-sm tracking-[0.2em] uppercase group"

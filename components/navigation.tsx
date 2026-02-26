@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu, X } from "lucide-react"
+import { Facebook, Instagram, Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import logoImage from "@/images/Logo_Pari.png"
 
@@ -28,13 +28,15 @@ export function Navigation() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
     { href: "/services", label: "Services" },
+    { href: "/contact", label: "Contact" },
   ]
 
-  const navItemColor = isScrolled ? "text-foreground" : "text-white"
-  const navItemHoverColor = isScrolled ? "text-foreground/60 hover:text-foreground" : "text-white/70 hover:text-white"
-  const iconColor = isScrolled ? "text-foreground" : "text-white"
+  const forceSolidNav = /^\/services\/[^/]+/.test(pathname)
+  const useSolidNav = isScrolled || forceSolidNav
+  const navItemColor = useSolidNav ? "text-[#2B1608]" : "text-white"
+  const navItemHoverColor = useSolidNav ? "text-[#2B1608]/70 hover:text-[#2B1608]" : "text-white/70 hover:text-white"
+  const iconColor = useSolidNav ? "text-[#2B1608]" : "text-white"
 
   return (
     <>
@@ -43,7 +45,7 @@ export function Navigation() {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? "bg-[#FCF5E2] backdrop-blur-md border-b border-border" : "bg-transparent"
+          useSolidNav ? "bg-[#FCF5E2] backdrop-blur-md border-b border-border" : "bg-transparent"
         }`}
       >
         <nav className="w-full px-3 sm:px-5 lg:px-8">
@@ -74,7 +76,7 @@ export function Navigation() {
                   rel="noreferrer"
                   aria-label="WhatsApp"
                   className={`transition-colors duration-500 ${
-                    isScrolled ? "text-[#2B1608] hover:text-[#2B1608]/75" : "text-white hover:text-white/75"
+                    useSolidNav ? "text-[#2B1608] hover:text-[#2B1608]/75" : "text-white hover:text-white/75"
                   }`}
                 >
                   <svg viewBox="0 0 24 24" className="h-8 w-8 fill-current" aria-hidden="true">
@@ -135,6 +137,47 @@ export function Navigation() {
                     {link.label}
                   </Link>
                 ))}
+
+                <div className="pt-2 border-t border-border/70 space-y-2">
+                  <p className="text-xs tracking-[0.2em] uppercase text-foreground/60">Contact</p>
+                  <a href="mailto:parikshetstudio@gmail.com" className="block text-sm text-foreground/80 hover:text-foreground">
+                    parikshetstudio@gmail.com
+                  </a>
+                  <a href="tel:+917498724242" className="block text-sm text-foreground/80 hover:text-foreground">
+                    +91 7498 724 242
+                  </a>
+                  <div className="flex items-center gap-3 pt-1">
+                    <a
+                      href="https://www.instagram.com/parikshet.phand?igsh=OGpsdWRrdmhnZjA3"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Instagram"
+                      className="inline-flex h-9 w-9 items-center justify-center border border-[#2B1608]/45 text-[#2B1608] hover:bg-[#2B1608] hover:text-background transition-colors"
+                    >
+                      <Instagram className="h-4 w-4" />
+                    </a>
+                    <a
+                      href="https://www.facebook.com/share/16PAtjqvax/"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Facebook"
+                      className="inline-flex h-9 w-9 items-center justify-center border border-[#2B1608]/45 text-[#2B1608] hover:bg-[#2B1608] hover:text-background transition-colors"
+                    >
+                      <Facebook className="h-4 w-4" />
+                    </a>
+                    <a
+                      href="https://wa.me/917498724242"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="WhatsApp"
+                      className="inline-flex h-9 w-9 items-center justify-center border border-[#2B1608]/45 text-[#2B1608] hover:bg-[#2B1608] hover:text-background transition-colors"
+                    >
+                      <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden="true">
+                        <path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.47 1.34 4.98L2 22l5.2-1.37a9.95 9.95 0 0 0 4.84 1.24H12c5.5 0 9.96-4.46 9.96-9.96S17.5 2 12 2h.04zm0 18.2h-.03a8.2 8.2 0 0 1-4.17-1.13l-.3-.18-3.08.81.82-3.01-.2-.31a8.2 8.2 0 1 1 6.96 3.82zm4.5-6.15c-.24-.12-1.43-.7-1.65-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.44-1.34-1.68-.14-.24-.02-.37.1-.5.1-.1.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.43h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.68 2.57 4.08 3.6.57.24 1.01.38 1.36.48.57.18 1.08.15 1.48.09.45-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
               </nav>
             </motion.div>
           </>

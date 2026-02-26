@@ -5,7 +5,8 @@ import Image from "next/image"
 import { Facebook, Instagram } from "lucide-react"
 import { Navigation } from "@/components/navigation"
 import { PremiumFooter } from "@/components/premium-footer"
-import { toast } from "@/hooks/use-toast"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { toast } from "sonner"
 
 type FormValues = {
   name: string
@@ -22,6 +23,34 @@ const initialValues: FormValues = {
   subject: "",
   message: "",
 }
+
+const faqs = [
+  {
+    question: "What services do you offer at Parikshet ART Studio?",
+    answer:
+      "We offer Graphic Design, Sculpture and Mural Art, Paintings, Event Planning, Music, and custom public art projects.",
+  },
+  {
+    question: "Can I request custom artwork for home or office spaces?",
+    answer:
+      "Yes. We take custom commissions for personal and commercial spaces based on your concept, size, color palette, and timeline.",
+  },
+  {
+    question: "How does the project process work?",
+    answer:
+      "After initial discussion, we share concept direction, finalize scope and timeline, then move to creation and delivery.",
+  },
+  {
+    question: "Do you take collaboration projects with brands and events?",
+    answer:
+      "Yes, we actively collaborate with brands, institutions, and event teams for visual storytelling and artistic experiences.",
+  },
+  {
+    question: "How can I contact the studio quickly?",
+    answer:
+      "Use the contact form on the Contact page or connect directly through WhatsApp for faster coordination.",
+  },
+]
 
 export default function ContactPage() {
   const [values, setValues] = useState<FormValues>(initialValues)
@@ -68,11 +97,7 @@ export default function ContactPage() {
       if (!res.ok || !data.ok) {
         const message = data.error || "Unable to send message. Please try again."
         setSubmitError(message)
-        toast({
-          title: "Message not sent",
-          description: message,
-          variant: "destructive",
-        })
+        toast.error("Message not sent", { description: message })
         return
       }
 
@@ -80,19 +105,11 @@ export default function ContactPage() {
       setSubmitted(false)
       const message = "Thank you! Your message has been sent successfully."
       setSubmitMessage(message)
-      toast({
-        title: "Message sent",
-        description: message,
-        className: "border-green-700 bg-green-50 text-green-900",
-      })
+      toast.success("Message sent", { description: message })
     } catch {
       const message = "Unable to send message. Please try again."
       setSubmitError(message)
-      toast({
-        title: "Message not sent",
-        description: message,
-        variant: "destructive",
-      })
+      toast.error("Message not sent", { description: message })
     } finally {
       setIsSubmitting(false)
     }
@@ -111,12 +128,12 @@ export default function ContactPage() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-[#2B1608]/60" />
+        <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           <p className="text-xs tracking-[0.35em] uppercase text-background/75 mb-4">Contact</p>
           <h1 className="font-serif text-4xl md:text-6xl leading-[1.1] mb-5 text-background">Get in Touch</h1>
           <p className="max-w-3xl text-background/85 leading-relaxed mt-5">
-            Interested in learning more about parishet Phand or exploring potential collaborations? Get in touch today
+            Interested in learning more about Parikshet Phand or exploring potential collaborations? Get in touch today
             to start a conversation about how art and creativity can transform your world.
           </p>
         </div>
@@ -191,7 +208,7 @@ export default function ContactPage() {
                   <option value="Paintings">Paintings</option>
                   <option value="Event Planning">Event Planning</option>
                   <option value="Music">Music</option>
-                  <option value="Pune Mertro Work">Pune Mertro Work</option>
+                  <option value="Pune Metro Work">Pune Metro Work</option>
                 </select>
                 {submitted && errors.service && <p className="mt-1 text-xs text-red-600">{errors.service}</p>}
               </div>
@@ -317,6 +334,30 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24 border-y border-[#2B1608]/20 bg-[#FCF5E2] px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-10 md:mb-12">
+            <p className="text-xs tracking-[0.25em] uppercase text-[#8A7040]/65 mb-3">FAQ</p>
+            <h2 className="font-serif text-3xl md:text-5xl text-[#8A7040]">Frequently Asked Questions</h2>
+          </div>
+
+          <div className="border border-[#2B1608]/30 bg-[#FFF9EC] px-5 md:px-8">
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((item, index) => (
+                <AccordionItem key={item.question} value={`item-${index}`} className="border-[#2B1608]/20">
+                  <AccordionTrigger className="text-base md:text-lg text-[#8A7040] hover:no-underline">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm md:text-base text-[#8A7040]/75 leading-relaxed">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>

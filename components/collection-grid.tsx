@@ -39,7 +39,7 @@ const products = [
   },
   {
     href: "/services/pune-mertro",
-    name: "pune Mertro",
+    name: "Pune Metro",
     price: 700,
     image: "/metro-work.jpg",
     hoverImage: "/metro-work.jpg",
@@ -55,7 +55,7 @@ const products = [
   },
 ]
 
-const artServices = ["Graphic Design", "Sculpture and Mural Art", "Paintings", "Event Planning", "Music", "pune Mertro"]
+const artServices = ["Graphic Design", "Sculpture and Mural Art", "Paintings", "Event Planning", "Music", "Pune Metro"]
 
 type CollectionGridProps = {
   showCta?: boolean

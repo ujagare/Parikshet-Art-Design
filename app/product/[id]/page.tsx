@@ -66,11 +66,11 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             Home
           </Link>
           <ChevronRight className="w-3 h-3" />
-          <Link href="/shop" className="hover:text-foreground transition-colors">
+          <Link href="/services" className="hover:text-foreground transition-colors">
             Shop
           </Link>
           <ChevronRight className="w-3 h-3" />
-          <Link href={`/shop?category=${product.category}`} className="hover:text-foreground transition-colors">
+          <Link href="/services" className="hover:text-foreground transition-colors">
             {product.category}
           </Link>
           <ChevronRight className="w-3 h-3" />

@@ -1,5 +1,6 @@
-﻿import Image from "next/image"
+import Image from "next/image"
 import Link from "next/link"
+import aboutHeroImage from "@/images/6be932f7-4444-41dd-9752-6138d7da69ec.jpg"
 import { Navigation } from "@/components/navigation"
 import { PremiumFooter } from "@/components/premium-footer"
 import { CountUp } from "@/components/ui/count-up"
@@ -25,26 +26,43 @@ export default function AboutPage() {
     <main className="min-h-screen bg-[#FCF5E2]">
       <Navigation />
 
-      <section className="relative min-h-[78vh] flex items-end overflow-hidden">
-        <Image
-          src="/about-hero.jpg"
-          alt="Parikshet ART Studio hero"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(43,22,8,0.85),rgba(43,22,8,0.25))]" />
-        <div className="relative z-10 w-full px-6 lg:px-8 pb-12 md:pb-16">
-          <div className="max-w-6xl mx-auto">
-            <p className="text-xs tracking-[0.35em] uppercase text-background/75 mb-4">About The Artist</p>
-            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-background max-w-4xl">
-              parishet Phand
-            </h1>
-            <p className="mt-5 max-w-3xl text-background/85 text-base md:text-lg leading-relaxed">
-              Multi-disciplinary artist, designer, and entrepreneur creating meaningful work across painting,
-              sculpture, mural art, design, music, and event experiences.
-            </p>
+      <section className="relative pt-16 lg:pt-20 border-b border-[#2B1608]/20 overflow-hidden">
+        <Image src={aboutHeroImage} alt="About Parikshet Art" fill priority sizes="100vw" className="object-cover" />
+        <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(0,0,0,0.86)_0%,rgba(0,0,0,0.62)_50%,rgba(0,0,0,0.35)_100%)]" />
+
+        <div className="relative z-10 px-6 lg:px-8 py-14 md:py-16 lg:py-20">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-10 items-end">
+            <div className="border border-[#8A7040]/25 bg-[#F7EEDB] p-6 md:p-9">
+              <p className="text-[11px] md:text-xs tracking-[0.3em] uppercase text-[#8A7040]/80 mb-4">About The Studio</p>
+              <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl text-[#8A7040] leading-[1.03]">
+                About Parikshet
+                <span className="block mt-1 md:mt-2">Art Studio</span>
+              </h1>
+              <p className="mt-5 text-sm md:text-lg leading-relaxed text-[#8A7040]/90 max-w-2xl">
+                A multi-disciplinary creative house where painting, sculpture, mural art, design, music, and event
+                direction merge into bold, meaningful visual experiences.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center mt-7 border border-[#8A7040] text-[#8A7040] px-7 py-3 text-xs tracking-[0.18em] uppercase hover:bg-[#8A7040] hover:text-[#F7EEDB] transition-colors"
+              >
+                Start A Project
+              </Link>
+            </div>
+
+            <div className="hidden lg:block justify-self-end w-[21rem] xl:w-[24rem] -rotate-[5deg]">
+              <div className="relative h-[30rem] w-full overflow-hidden bg-[#2B1608] p-2.5 border-4 border-[#2B1608] shadow-[0_14px_28px_rgba(43,22,8,0.35)]">
+                <div className="relative h-full w-full overflow-hidden border border-[#2B1608]/35">
+                  <Image
+                    src="/service-galleries/sculpture-and-mural-art/15322ea4-2424-47da-8b96-3e4f5b07c855.jpg"
+                    alt="About page artwork highlight"
+                    fill
+                    sizes="(max-width: 1279px) 21rem, 24rem"
+                    className="object-cover object-center"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -54,7 +72,7 @@ export default function AboutPage() {
           <div>
             <p className="font-serif text-5xl md:text-7xl text-[#8A7040] mb-8 md:mb-10">HELLO!</p>
             <p className="font-serif text-3xl md:text-5xl leading-[1.18] text-[#8A7040] max-w-3xl">
-              I&apos;M PARISHET PHAND, A MULTI-DISCIPLINARY ARTIST, DESIGNER, AND ENTREPRENEUR BASED IN PUNE, INDIA.
+              I&apos;M PARIKSHET PHAND, A MULTI-DISCIPLINARY ARTIST, DESIGNER, AND ENTREPRENEUR BASED IN PUNE, INDIA.
               MY PRIMARY FOCUS IS ON PAINTINGS, SCULPTURE, MURAL ART, BRANDING, EVENT DESIGN, AND CREATIVE IDENTITY
               PROJECTS.
             </p>
@@ -69,18 +87,17 @@ export default function AboutPage() {
           <div className="relative mx-auto w-full max-w-[560px]">
             <div className="hidden md:block absolute -top-14 -right-14 z-20 text-[#8A7040]/75">
               <SpinningText reverse className="text-xl" duration={4} radius={5.7}>
-                Artist . Creator . Vision • Parikshet ART Studio •
+                Artist . Creator . Vision * Parikshet ART Studio *
               </SpinningText>
             </div>
             <div className="relative aspect-[4/5] overflow-hidden rounded-t-[220px] border border-[#8A7040]/25 bg-[#848316]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(255,255,255,0.18),rgba(0,0,0,0.08))]" />
               <Image
                 src="/artist-profile.jpg"
                 alt="Parikshet Phand portrait"
                 fill
                 sizes="(max-width: 1024px) 90vw, 560px"
                 loading="lazy"
-                className="object-cover mix-blend-multiply opacity-90"
+                className="object-cover"
               />
             </div>
           </div>
@@ -168,5 +185,3 @@ export default function AboutPage() {
     </main>
   )
 }
-
-
