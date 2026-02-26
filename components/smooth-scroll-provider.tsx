@@ -15,6 +15,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
     if (prefersReducedMotion) return
 
     const lenis = new Lenis({
+      autoRaf: true,
       duration: 1.05,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
@@ -26,18 +27,11 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
 
     lenisRef.current = lenis
     document.documentElement.classList.add("lenis")
-    let rafId = 0
-
-    function raf(time: number) {
-      lenis.raf(time)
-      rafId = requestAnimationFrame(raf)
-    }
-
-    rafId = requestAnimationFrame(raf)
+    document.documentElement.classList.add("lenis-smooth")
 
     return () => {
-      cancelAnimationFrame(rafId)
       document.documentElement.classList.remove("lenis")
+      document.documentElement.classList.remove("lenis-smooth")
       lenis.destroy()
     }
   }, [])
