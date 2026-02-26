@@ -35,14 +35,14 @@ export function GlobalTextReveal() {
     const triggers: ScrollTrigger[] = []
 
     elements.forEach((el) => {
-      const splitType = /^H[1-6]$/.test(el.tagName) ? "chars" : "words"
+      const splitType = "words"
       const split = new GSAPSplitText(el, {
         type: splitType,
         wordsClass: "split-word",
         charsClass: "split-char",
       })
 
-      const targets = splitType === "chars" ? split.chars : split.words
+      const targets = split.words
       if (!targets?.length) {
         split.revert()
         return
