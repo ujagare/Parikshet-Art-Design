@@ -50,8 +50,8 @@ export default function Home() {
               <div>
                 <p className="text-xs tracking-[0.28em] uppercase text-[#8A7040]/70 mb-6">Artist Introduction</p>
                 <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-[#8A7040] leading-[1.05]">
-                  Welcome to the World of
-                  <span className="block mt-2">parishet Phand</span>
+                  Welcome To The World Of
+                  <span className="block mt-2">Parikshet Phand</span>
                 </h2>
               </div>
 
