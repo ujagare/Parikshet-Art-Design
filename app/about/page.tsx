@@ -157,7 +157,7 @@ export default function AboutPage() {
                   0{index + 1}
                 </span>
                 <h3 className="font-serif text-2xl md:text-3xl leading-[1.15] text-[#8A7040] mb-4">{item.title}</h3>
-                <p className="text-[#8A7040]/88 leading-relaxed text-base md:text-lg">{item.text}</p>
+                <p className="text-foreground/90 leading-relaxed text-base md:text-lg">{item.text}</p>
                 <div className="mt-6 h-px w-full bg-[#8A7040]/30" />
               </article>
             ))}

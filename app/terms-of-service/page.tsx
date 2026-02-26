@@ -13,7 +13,7 @@ export default function TermsOfServicePage() {
       </section>
 
       <section className="py-12 md:py-16">
-        <div className="max-w-4xl mx-auto px-6 text-[#8A7040]/88 space-y-6 leading-relaxed">
+        <div className="max-w-4xl mx-auto px-6 text-foreground/90 space-y-6 leading-relaxed">
           <p>
             By using this website, you agree to use the content and services lawfully and respectfully.
           </p>

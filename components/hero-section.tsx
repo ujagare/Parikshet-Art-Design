@@ -63,9 +63,6 @@ export function HeroSection() {
         )}
         <div className="absolute inset-0 bg-[#2B1608]/70" />
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
           style={{ y: leftPanelY, opacity: leftPanelOpacity }}
           className="relative z-10 text-background max-w-[240px]"
         >
@@ -117,9 +114,6 @@ export function HeroSection() {
         {/* Content overlay */}
         <div className="relative z-10 h-full flex flex-col justify-end p-8 lg:p-16 pb-24 lg:pb-32">
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             style={{ y: textY, opacity: textOpacity }}
             className="max-w-2xl"
           >

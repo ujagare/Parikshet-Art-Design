@@ -61,20 +61,34 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-6 pt-24 pb-8">
-        <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Link href="/" className="hover:text-foreground transition-colors">
-            Home
-          </Link>
-          <ChevronRight className="w-3 h-3" />
-          <Link href="/services" className="hover:text-foreground transition-colors">
-            Shop
-          </Link>
-          <ChevronRight className="w-3 h-3" />
-          <Link href="/services" className="hover:text-foreground transition-colors">
-            {product.category}
-          </Link>
-          <ChevronRight className="w-3 h-3" />
-          <span className="text-foreground">{product.name}</span>
+        <nav aria-label="Breadcrumb">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+            </li>
+            <li aria-hidden="true">
+              <ChevronRight className="w-3 h-3" />
+            </li>
+            <li>
+              <Link href="/services" className="hover:text-foreground transition-colors">
+                Services
+              </Link>
+            </li>
+            <li aria-hidden="true">
+              <ChevronRight className="w-3 h-3" />
+            </li>
+            <li>
+              <span>{product.category}</span>
+            </li>
+            <li aria-hidden="true">
+              <ChevronRight className="w-3 h-3" />
+            </li>
+            <li aria-current="page" className="text-foreground">
+              {product.name}
+            </li>
+          </ol>
         </nav>
       </div>
 
