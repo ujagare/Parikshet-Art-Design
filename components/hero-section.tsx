@@ -11,6 +11,8 @@ import SplitText from "@/components/SplitText"
 export function HeroSection() {
   const [isDesktop, setIsDesktop] = useState(false)
   const [reduceMotion, setReduceMotion] = useState(false)
+  const [supportsWebm, setSupportsWebm] = useState(true)
+  const [leftVideoFailed, setLeftVideoFailed] = useState(false)
   const { scrollYProgress } = useScroll()
   const heroImageScaleRaw = useTransform(scrollYProgress, [0, 0.45], [1.02, 1.2])
   const heroImageYRaw = useTransform(scrollYProgress, [0, 0.45], ["0%", "18%"])
@@ -28,12 +30,16 @@ export function HeroSection() {
   useEffect(() => {
     const desktopQuery = window.matchMedia("(min-width: 1024px)")
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const testVideo = document.createElement("video")
+    const webmSupport =
+      testVideo.canPlayType('video/webm; codecs="vp8, vorbis"') || testVideo.canPlayType("video/webm")
 
     const handleDesktop = () => setIsDesktop(desktopQuery.matches)
     const handleMotion = () => setReduceMotion(motionQuery.matches)
 
     handleDesktop()
     handleMotion()
+    setSupportsWebm(Boolean(webmSupport))
 
     desktopQuery.addEventListener("change", handleDesktop)
     motionQuery.addEventListener("change", handleMotion)
@@ -48,7 +54,7 @@ export function HeroSection() {
     <section className="relative min-h-screen flex">
       {/* Left content - 20% */}
       <div className="hidden lg:flex relative items-center justify-center w-[22%] px-8 overflow-hidden">
-        {isDesktop && (
+        {isDesktop && supportsWebm && !leftVideoFailed && (
           <video
             className="absolute inset-0 h-full w-full object-cover"
             autoPlay
@@ -56,10 +62,15 @@ export function HeroSection() {
             muted
             playsInline
             preload="metadata"
+            poster="/about-hero.jpg"
+            onError={() => setLeftVideoFailed(true)}
             aria-hidden
           >
             <source src="/silk-bg.webm" type="video/webm" />
           </video>
+        )}
+        {isDesktop && (!supportsWebm || leftVideoFailed) && (
+          <Image src="/about-hero.jpg" alt="" fill sizes="22vw" className="object-cover" aria-hidden />
         )}
         <div className="absolute inset-0 bg-[#2B1608]/70" />
         <motion.div

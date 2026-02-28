@@ -1,10 +1,21 @@
 "use client"
 import Link from "next/link"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 import { Instagram, Facebook } from "lucide-react"
 import logoImage from "@/images/Logo_Pari.png"
 
 export function PremiumFooter() {
+  const [supportsWebm, setSupportsWebm] = useState(true)
+  const [videoFailed, setVideoFailed] = useState(false)
+
+  useEffect(() => {
+    const testVideo = document.createElement("video")
+    const webmSupport =
+      testVideo.canPlayType('video/webm; codecs="vp8, vorbis"') || testVideo.canPlayType("video/webm")
+    setSupportsWebm(Boolean(webmSupport))
+  }, [])
+
   const footerLinks = {
     studio: [
       { label: "Home", href: "/" },
@@ -29,17 +40,22 @@ export function PremiumFooter() {
 
   return (
     <footer className="relative overflow-hidden text-background">
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        aria-hidden
-      >
-        <source src="/silk-bg.webm" type="video/webm" />
-      </video>
+      <Image src="/about-hero.jpg" alt="" fill sizes="100vw" className="absolute inset-0 object-cover" aria-hidden />
+      {supportsWebm && !videoFailed && (
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          poster="/about-hero.jpg"
+          onError={() => setVideoFailed(true)}
+          aria-hidden
+        >
+          <source src="/silk-bg.webm" type="video/webm" />
+        </video>
+      )}
       <div className="absolute inset-0 bg-[#2B1608]/80" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 mb-10">

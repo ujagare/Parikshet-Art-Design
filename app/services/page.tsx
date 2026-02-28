@@ -71,36 +71,36 @@ export default function ServicesPage() {
       <section className="relative min-h-[78vh] lg:min-h-[92vh] flex items-center pt-24 md:pt-28 overflow-hidden border-b border-[#2B1608]/20">
         <Image src={aboutHeroImage} alt="Services hero background" fill priority sizes="100vw" className="object-cover" />
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute left-[6%] top-[22%] hidden md:block w-[240px] lg:w-[310px] h-[340px] lg:h-[430px] bg-[#8A7040] p-2 border-4 border-[#8A7040] shadow-[0_18px_42px_rgba(0,0,0,0.42),0_6px_16px_rgba(0,0,0,0.24)]">
+          <div className="absolute left-[6%] top-[22%] hidden xl:block w-[310px] h-[430px] bg-[#8A7040] p-2 border-4 border-[#8A7040] shadow-[0_18px_42px_rgba(0,0,0,0.42),0_6px_16px_rgba(0,0,0,0.24)]">
             <div className="relative h-full w-full overflow-hidden border border-[#8A7040]/35">
-              <Image src="/painting-hero.jpg" alt="Decorative art image" fill sizes="(max-width: 1024px) 240px, 310px" loading="lazy" className="object-cover" />
+              <Image src="/painting-hero.jpg" alt="Decorative art image" fill sizes="310px" loading="lazy" className="object-cover" />
             </div>
           </div>
-          <div className="absolute left-[2.5%] bottom-[8%] hidden lg:block w-[200px] h-[280px] bg-[#8A7040] p-2 border-4 border-[#8A7040] shadow-[0_18px_42px_rgba(0,0,0,0.42),0_6px_16px_rgba(0,0,0,0.24)]">
+          <div className="absolute left-[2.5%] bottom-[8%] hidden xl:block w-[200px] h-[280px] bg-[#8A7040] p-2 border-4 border-[#8A7040] shadow-[0_18px_42px_rgba(0,0,0,0.42),0_6px_16px_rgba(0,0,0,0.24)]">
             <div className="relative h-full w-full overflow-hidden border border-[#8A7040]/35">
               <Image src="/service-galleries/sculpture-and-mural-art/238d7518-ffac-4ed7-a7ee-882772c394ff.jpg" alt="Decorative artist image" fill sizes="200px" loading="lazy" className="object-cover" />
             </div>
           </div>
-          <div className="absolute right-[6%] top-[16%] hidden md:block w-[230px] lg:w-[290px] h-[320px] lg:h-[400px] z-10 bg-[#8A7040] p-2 border-4 border-[#8A7040] shadow-[0_18px_42px_rgba(0,0,0,0.42),0_6px_16px_rgba(0,0,0,0.24)]">
+          <div className="absolute right-[6%] top-[16%] hidden xl:block w-[290px] h-[400px] z-10 bg-[#8A7040] p-2 border-4 border-[#8A7040] shadow-[0_18px_42px_rgba(0,0,0,0.42),0_6px_16px_rgba(0,0,0,0.24)]">
             <div className="relative h-full w-full overflow-hidden border border-[#8A7040]/35">
-              <Image src="/service-galleries/sculpture-and-mural-art/164297427_10225360379453469_7441568806068820631_n.jpg" alt="Decorative sculpture image" fill sizes="(max-width: 1024px) 230px, 290px" loading="lazy" className="object-cover" />
+              <Image src="/service-galleries/sculpture-and-mural-art/164297427_10225360379453469_7441568806068820631_n.jpg" alt="Decorative sculpture image" fill sizes="290px" loading="lazy" className="object-cover" />
             </div>
           </div>
-          <div className="absolute right-[3%] top-[46%] hidden lg:block w-[220px] h-[250px] z-20 bg-[#8A7040] p-2 border-4 border-[#8A7040] shadow-[0_18px_42px_rgba(0,0,0,0.42),0_6px_16px_rgba(0,0,0,0.24)]">
+          <div className="absolute right-[3%] top-[46%] hidden xl:block w-[220px] h-[250px] z-20 bg-[#8A7040] p-2 border-4 border-[#8A7040] shadow-[0_18px_42px_rgba(0,0,0,0.42),0_6px_16px_rgba(0,0,0,0.24)]">
             <div className="relative h-full w-full overflow-hidden border border-[#8A7040]/35">
               <Image src="/service-galleries/music/75398082_10220622584171548_4544843502529282048_n.jpg" alt="Decorative studio image" fill sizes="220px" loading="lazy" className="object-cover" />
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-10 text-center">
           <p className="inline-flex rounded-full border border-[#8A7040]/45 bg-[#FCF5E2]/70 px-5 py-2 text-[11px] tracking-[0.22em] uppercase text-[#8A7040] mb-6">
             Services Overview
           </p>
-          <h1 className="font-serif text-[2.15rem] sm:text-[2.6rem] md:text-[4.2rem] lg:text-[5.1rem] leading-[1.02] md:leading-[0.98] text-[#8A7040] text-balance">
+          <h1 className="mx-auto max-w-[18ch] font-serif text-[clamp(2rem,6.4vw,5.1rem)] leading-[1.05] sm:leading-[1.02] lg:leading-[0.98] text-[#8A7040] text-balance">
             One Creative Platform Powering Your Studio
           </h1>
-          <p className="max-w-2xl mx-auto text-lg md:text-[1.75rem] text-[#8A7040]/90 mt-7">
+          <p className="max-w-2xl mx-auto text-lg md:text-[1.35rem] lg:text-[1.75rem] text-[#8A7040]/90 mt-7">
             Everything you need to shape impactful artistic experiences.
           </p>
         </div>
